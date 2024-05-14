@@ -18,7 +18,6 @@ jobs:
       with:
         repository: zedcom-app/desktop
         path: desktop
-        clean: 'false'
         token: ${{ secrets.PAT }}  # Personal Access Token (PAT) with repository permissions
     
     - name: Set up Python
@@ -40,9 +39,6 @@ jobs:
         xcopy /E /I /Y "desktop\dist\ZedCom Desktop" "."
 
 
-    - name: Get default branch name
-      id: get_branch
-      run: echo "::set-output name=branch::$(git symbolic-ref --short HEAD || git branch -l --format='%(HEAD) %(refname:short)' | grep -Eo "^[^ ]+" | tail -n 1)"
 
     - name: Commit build artifacts
       run: |
@@ -50,4 +46,4 @@ jobs:
         git config --global user.email 'actions@users.noreply.github.com'
         git add .
         git commit -m "Add build artifacts"
-        git push origin ${{ steps.get_branch.outputs.branch }}
+        git push origin main
