@@ -18,6 +18,7 @@ jobs:
       with:
         repository: zedcom-app/desktop
         path: desktop
+        clean: 'false'
         token: ${{ secrets.PAT }}  # Personal Access Token (PAT) with repository permissions
     
     - name: Set up Python
